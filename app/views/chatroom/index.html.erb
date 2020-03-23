@@ -8,40 +8,30 @@
         <div class="ui card fluid raised chat">
             <div class="content">
                 <div class="ui feed">
+                    <% @messages.each do |message|%>
                     <div class="event">
                         <div class="content">
                             <div class="summary">
-                                <em>Stevie Feliciano</em>: Good Morning Everyone.
+                                <em><%= message.user.username %></em>: <%= message.body %>.
                             </div>
                         </div>
                     </div>
-                    <div class="event">
-                        <div class="content">
-                            <div class="summary">
-                                <em>Helen Troy</em>: Hello, there!
-                            </div>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="content">
-                            <div class="summary">
-                                <em>Christian Rocha</em>: signed up for the site.
-                            </div>
-                        </div>
-                    </div>
-
+                    <% end %>
                 </div>
 
             </div>
             <div class="extra content">
-                <form class="ui reply form">
-                    <div class="field">
-                        <div class="ui fluid icon input">
-                            <input type="text" placeholder="Enter your message">
-                            <i class="bordered inverted orange edit icon "></i>
-                        </div>
+                <%= form_for(@message, html: { class: "ui reply form", role: "form"}, url: message_path) do |f| %>
+
+                <div class="field">
+                    <div class="ui fluid icon input">
+                        <%= f.text_field :body %>
+                        <%= f.button '<i class="bordered inverted orange edit icon"></i>'.html_safe %>
+
                     </div>
-                </form>
+                </div>
+
+                <% end %>
             </div>
         </div>
     </div>
